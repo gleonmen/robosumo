@@ -1,0 +1,11 @@
+const int IN1=7;     
+const int IN2=6;     // define pin for PWM used to control rotational speed of motor A  or pwmAPin
+const int IN3=4;     // define pin used to control rotational direction of motor B  or dirBPin
+const int IN4=5; 
+
+
+Puerto  
+Sensor IR  Izquierda Adelante 9
+Sensor IR  Derecha adelante 8
+Sensor IR  derecha Atras 10
+Sensor IR  IZquierda atras 11 
