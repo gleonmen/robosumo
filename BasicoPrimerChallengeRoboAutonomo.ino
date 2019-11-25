@@ -18,10 +18,10 @@ int dirServoDegree;
 
 
 Ultrasonic ultrasonic(0,1);
-const int IN1=7;     // define pin used to control rotational direction of motor A or  dirAPin
-const int IN2=6;     // define pin for PWM used to control rotational speed of motor A  or pwmAPin
-const int IN3=4;     // define pin used to control rotational direction of motor B  or dirBPin
-const int IN4=5;    // define pin for PWM used to control rotational speed of motor B or pwmBPin
+const int dirAPin=7;     // define pin used to control rotational direction of motor A or  dirAPin
+const int pwmAPin=6;     // define pin for PWM used to control rotational speed of motor A  or pwmAPin
+const int dirBPin=4;     // define pin used to control rotational direction of motor B  or dirBPin
+const int pwmBPin=5;    // define pin for PWM used to control rotational speed of motor B or pwmBPin
 
 const int WHITE=0;
 const int BLACK=1;
@@ -48,10 +48,10 @@ void setup() {
    pinMode(IR_RIGHT_BACK, INPUT);   
    pinMode(IR_LEFT_BACK, INPUT); 
    
-   pinMode(IN1, OUTPUT);   // set dirAPin to output mode
-   pinMode(IN2, OUTPUT);   // set pwmAPin to output mode
-   pinMode(IN3, OUTPUT);   // set dirBPin to output mode
-   pinMode(IN4, OUTPUT);   // set pwmBPin to output mode
+   pinMode(dirAPin, OUTPUT);   // set dirAPin to output mode
+   pinMode(pwmAPin, OUTPUT);   // set pwmAPin to output mode
+   pinMode(dirBPin, OUTPUT);   // set dirBPin to output mode
+   pinMode(pwmBPin, OUTPUT);   // set pwmBPin to output mode
    delay (5000); // as per sumo compat roles
 }
 
@@ -118,38 +118,45 @@ void DEBUG_CODE( int IR_left_front, int IR_right_front, int IR_left_back, int IR
 }
 
 //--------------------------------------------
-void FORWARD (int Speed){
+void FORWARD (byte motorSpd){
   //When we want to let Motor To move forward,
   // just void this part on the loop section .
-  analogWrite(IN1,Speed);
-  analogWrite(IN2,0);
-  analogWrite(IN3,0);
-  analogWrite(IN4,Speed);
+  analogWrite(dirAPin,motorSpd);
+  analogWrite(pwmAPin,0);
+  analogWrite(dirBPin,0);
+  analogWrite(pwmBPin,motorSpd);
+
+  /*digitalWrite(dirAPin, motorDir);
+  digitalWrite(dirBPin, motorDir);
+  analogWrite(pwmAPin, motorSpd);
+  analogWrite(pwmBPin, motorSpd);
+  */
+  
 }//--------------------------------------------
 void BACKWARD (int Speed){
   //When we want to let Motor To move forward,
   // just void this part on the loop section .
-  analogWrite(IN1,0);
-  analogWrite(IN2,Speed);
-  analogWrite(IN3,Speed);
-  analogWrite(IN4,0);
+  analogWrite(dirAPin,0);
+  analogWrite(pwmAPin,Speed);
+  analogWrite(dirBPin,Speed);
+  analogWrite(pwmBPin,0);
 }//--------------------------------------------
 void ROTATE (int Speed)
 {
   //When we want to let Motor To Rotate ,
   // just void this part on the loop section .
-  analogWrite(IN1,Speed);
-  analogWrite(IN2,0);
-  analogWrite(IN3,Speed);
-  analogWrite(IN4,0);
+  analogWrite(dirAPin,Speed);
+  analogWrite(pwmAPin,0);
+  analogWrite(dirBPin,Speed);
+  analogWrite(pwmBPin,0);
 }//--------------------------------------------
 void Stop(){
   //When we want to  Motor To stop ,
   // just void this part on the loop section .
-  analogWrite(IN1,0);
-  analogWrite(IN2,0);
-  analogWrite(IN3,0);
-  analogWrite(IN4,0);
+  analogWrite(dirAPin,0);
+  analogWrite(pwmAPin,0);
+  analogWrite(dirBPin,0);
+  analogWrite(pwmBPin,0);
 }
 
 void  rotationServoAngle(byte dirServoDegree) {
